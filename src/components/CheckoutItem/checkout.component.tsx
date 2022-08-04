@@ -15,7 +15,7 @@ export const CheckoutItem = () => {
                 <Imgdiv>
                   <img
                     alt="Monsters"
-                    src={`https://robohash.org/${value.id}?set=set2&size=80x80`}
+                    src={`https://robohash.org/${value.id}?set=set2&size=70x70`}
                   />
                 </Imgdiv>
                 <div>
@@ -38,6 +38,7 @@ export const CheckoutItem = () => {
 };
 
 const Maindiv = styled.div`
+  border-radius: 9px;
   margin: 100px auto;
   background-color: white;
   display: flex;
@@ -45,16 +46,21 @@ const Maindiv = styled.div`
   width: 800px;
   padding: 24px;
   justify-content: flex-start;
+
+  &:nth-child(0) {
+    border-top-right-radius: 9px;
+    border-top-left-radius: 9px;
+  }
 `;
 
 const Innerdiv = styled.div`
-  margin: 0px auto;
-  padding: 12px;
-  background-color: #cfcfcf;
-  gap: 12px;
+  /* margin: 0px auto; */
+  padding: 8px;
+  gap: 4px;
   width: 700px;
+  height: 60px;
   display: flex;
-  border-bottom: 3px solid black;
+  border-bottom: 1px solid black;
   justify-content: space-between;
 `;
 
@@ -72,7 +78,11 @@ const Rightdiv = styled.div`
 `;
 
 const Imgdiv = styled.div`
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   overflow: hidden;
-  border: 1px solid purple;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
 `;
