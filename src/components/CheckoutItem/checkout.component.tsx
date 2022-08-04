@@ -7,57 +7,72 @@ export const CheckoutItem = () => {
 
   return (
     <>
-      {/* <CheckoutContainer>
-        {Object.keys(CartItems).length !== 0 ? (
-          <CheckoutList>
-            {Object.values(CartItems).map((value) => (
-              <li>
-                {value.name}------ x{value.quantity}
-              </li>
-            ))}
-          </CheckoutList>
-        ) : (
-          <CheckoutList>
-            <li>Your cart is empty</li>
-          </CheckoutList>
-        )}
-      </CheckoutContainer>
- */}
-      {Object.values(CartItems).map((value) => (
+      {Object.keys(CartItems).length !== 0 ? (
         <Maindiv>
-          <Leftdiv>
-            <img
-              alt="Monsters"
-              src={`https://robohash.org/${value.id}?set=set2&size=80x80`}
-            />
-            <div>
-              <h2>{value.name}</h2>
-            </div>
-          </Leftdiv>
-          <Rightdiv>
-            <h1>x{value.quantity}</h1>
-          </Rightdiv>
+          {Object.values(CartItems).map((value) => (
+            <Innerdiv>
+              <Leftdiv>
+                <Imgdiv>
+                  <img
+                    alt="Monsters"
+                    src={`https://robohash.org/${value.id}?set=set2&size=80x80`}
+                  />
+                </Imgdiv>
+                <div>
+                  <h2>{value.name}</h2>
+                </div>
+              </Leftdiv>
+              <Rightdiv>
+                <h1>x{value.quantity}</h1>
+              </Rightdiv>
+            </Innerdiv>
+          ))}
         </Maindiv>
-      ))}
+      ) : (
+        <Maindiv>
+          <h1>Your cart is empty</h1>
+        </Maindiv>
+      )}
     </>
   );
 };
 
 const Maindiv = styled.div`
+  margin: 100px auto;
   background-color: white;
-  margin-left: 100px;
   display: flex;
+  flex-direction: column;
+  width: 800px;
+  padding: 24px;
+  justify-content: flex-start;
+`;
+
+const Innerdiv = styled.div`
+  margin: 0px auto;
+  padding: 12px;
+  background-color: #cfcfcf;
+  gap: 12px;
+  width: 700px;
+  display: flex;
+  border-bottom: 3px solid black;
   justify-content: space-between;
-  width: 60%;
 `;
 
 const Leftdiv = styled.div`
+  margin-left: 24px;
   display: flex;
   align-items: center;
   gap: 24px;
 `;
 
 const Rightdiv = styled.div`
+  margin-right: 24px;
   display: flex;
   align-items: center;
+`;
+
+const Imgdiv = styled.div`
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid purple;
 `;

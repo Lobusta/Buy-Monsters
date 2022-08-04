@@ -8,21 +8,6 @@ export const Checkout = () => {
 
   return (
     <>
-      <CheckoutContainer>
-        {Object.keys(CartItems).length !== 0 ? (
-          <CheckoutList>
-            {Object.values(CartItems).map((value) => (
-              <li>
-                {value.name}------ x{value.quantity}
-              </li>
-            ))}
-          </CheckoutList>
-        ) : (
-          <CheckoutList>
-            <li>Your cart is empty</li>
-          </CheckoutList>
-        )}
-      </CheckoutContainer>
       <CheckoutItem />
     </>
   );
