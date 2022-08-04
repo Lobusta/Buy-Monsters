@@ -1,9 +1,16 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { SelectCartItems } from "../../redux/reducers/cart/cartselectors";
-
+import { useDispatch } from "react-redux";
+import { clearItemFromCart } from "../../redux/reducers/cart/cartactions";
 export const CheckoutItem = () => {
   const CartItems = useSelector(SelectCartItems);
+
+  const dispatch = useDispatch();
+
+  const RemoveItemFromCart = (producttoRemoveId: number) => {
+    dispatch(clearItemFromCart(CartItems, producttoRemoveId));
+  };
 
   return (
     <>
@@ -24,13 +31,20 @@ export const CheckoutItem = () => {
               </Leftdiv>
               <Rightdiv>
                 <h1>x{value.quantity}</h1>
+                <ClearBtn
+                  onClick={() => {
+                    RemoveItemFromCart(value.id);
+                  }}
+                >
+                  &#10005;
+                </ClearBtn>
               </Rightdiv>
             </Innerdiv>
           ))}
         </Maindiv>
       ) : (
         <Maindiv>
-          <h1>Your cart is empty</h1>
+          <h2>Your cart is empty</h2>
         </Maindiv>
       )}
     </>
@@ -46,15 +60,9 @@ const Maindiv = styled.div`
   width: 800px;
   padding: 24px;
   justify-content: flex-start;
-
-  &:nth-child(0) {
-    border-top-right-radius: 9px;
-    border-top-left-radius: 9px;
-  }
 `;
 
 const Innerdiv = styled.div`
-  /* margin: 0px auto; */
   padding: 8px;
   gap: 4px;
   width: 700px;
@@ -75,6 +83,7 @@ const Rightdiv = styled.div`
   margin-right: 24px;
   display: flex;
   align-items: center;
+  gap: 48px;
 `;
 
 const Imgdiv = styled.div`
@@ -85,4 +94,16 @@ const Imgdiv = styled.div`
   border: 1px solid black;
   display: flex;
   justify-content: center;
+`;
+
+const ClearBtn = styled.span`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 `;

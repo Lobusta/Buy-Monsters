@@ -31,9 +31,22 @@ export type CartItemType = {
     return [...cartItems, { ...productToAdd, quantity: 1 }];
   };
 
+
+  const clearCartItem = (cartItems:CartItemType[], cartItemToClear:number) =>
+  cartItems.filter((cartItem) => cartItem.id !== cartItemToClear);
+
+
+
+
 export const addItemToCart = (cartItems: CartItemType[], productToAdd:CartItemType) => {
   const newCartItems = addCartItem(cartItems, productToAdd);
   return addtoCart(CART_ACTIONS.ADD_TO_CART, newCartItems);
+};
+
+
+export const clearItemFromCart = (cartItems:CartItemType[], cartItemToClear:number) => {
+  const newCartItems = clearCartItem(cartItems, cartItemToClear);
+  return ClearfromCart(CART_ACTIONS.ADD_TO_CART, newCartItems);
 };
 
 
@@ -45,6 +58,13 @@ const addtoCart = (type:string, cart:CartItemType[]) => {
     }
 }
 
+
+const ClearfromCart = (type:string, cart:CartItemType[]) => {
+  return {
+      type: type,
+      payload:cart
+  }
+}
 
 
 // export const addtoCart = (cartItemtoAdd:String) => {
