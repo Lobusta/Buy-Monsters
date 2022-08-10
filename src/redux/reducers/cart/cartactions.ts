@@ -1,7 +1,6 @@
 
 export const CART_ACTIONS = {
     ADD_TO_CART: "ADD_TO_CART",
-    REMOVE_FROM_CART: "REMOVE_FROM_CART"
 }
 
 
@@ -36,6 +35,41 @@ export type CartItemType = {
   cartItems.filter((cartItem) => cartItem.id !== cartItemToClear);
 
 
+  const decreaseCartItem = (cartItems: CartItemType[], cartItemtoDecrease:number) => {
+    
+  const existingCartItem = cartItems.find(
+    (cartItem) => cartItem.id === cartItemtoDecrease
+  );
+
+  if (existingCartItem?.quantity === 1) {
+    return cartItems.filter((cartItem) => cartItem.id !== cartItemtoDecrease);
+  }
+
+  return cartItems.map((cartItem) =>
+    cartItem.id === cartItemtoDecrease
+      ? { ...cartItem, quantity: cartItem.quantity - 1 }
+      : cartItem
+  );
+  }
+
+  const increaseCartItem = (cartItems: CartItemType[], cartItemtoDecrease:number) => {
+    return cartItems.map((cartItem) =>
+      cartItem.id === cartItemtoDecrease
+        ? { ...cartItem, quantity: cartItem.quantity + 1 }
+        : cartItem
+    );
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 export const addItemToCart = (cartItems: CartItemType[], productToAdd:CartItemType) => {
@@ -48,6 +82,17 @@ export const clearItemFromCart = (cartItems:CartItemType[], cartItemToClear:numb
   const newCartItems = clearCartItem(cartItems, cartItemToClear);
   return ClearfromCart(CART_ACTIONS.ADD_TO_CART, newCartItems);
 };
+
+
+export const DecreaseItem = (cartItems: CartItemType[], cartItemtoDecrease:number) => {
+  const newCartItems = decreaseCartItem(cartItems, cartItemtoDecrease);
+  return DecreasefromCart(CART_ACTIONS.ADD_TO_CART, newCartItems)
+}
+
+export const IncreaseItem = (cartItems: CartItemType[], cartItemtoIncrease:number) => {
+  const newCartItems = increaseCartItem(cartItems, cartItemtoIncrease);
+  return IncreasefromCart(CART_ACTIONS.ADD_TO_CART, newCartItems)
+}
 
 
 
@@ -66,19 +111,18 @@ const ClearfromCart = (type:string, cart:CartItemType[]) => {
   }
 }
 
+const DecreasefromCart = (type:string, cart:CartItemType[]) => {
+  return {
+      type: type,
+      payload:cart
+  }
+}
 
-// export const addtoCart = (cartItemtoAdd:String) => {
-    
-//     return {
-//      type: CART_ACTONS.ADD_TO_CART,
-//      payload: cartItemtoAdd
-     
 
-// }}
-
-// export const removefromCart = (cartItem:Object) => ({
-//     type:CART_ACTONS.REMOVE_FROM_CART,
-//     payload: cartItem
-// })
-
+const IncreasefromCart = (type:string, cart:CartItemType[]) => {
+  return {
+      type: type,
+      payload:cart
+  }
+}
 

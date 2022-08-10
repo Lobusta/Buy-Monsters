@@ -7,11 +7,7 @@ interface IProductCardProps {
   email: string;
 }
 
-export const ProductCard: React.FC<IProductCardProps> = ({
-  title,
-  id,
-  email,
-}) => {
+export const ProductCard: React.FC<IProductCardProps> = ({ title, id }) => {
   return (
     <>
       <Card
@@ -34,7 +30,6 @@ export const ProductCard: React.FC<IProductCardProps> = ({
             fontWeight: "700",
           }}
           title={title}
-          // description={email}
         />
       </Card>
     </>

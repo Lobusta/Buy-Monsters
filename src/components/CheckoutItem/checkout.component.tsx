@@ -2,7 +2,11 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { SelectCartItems } from "../../redux/reducers/cart/cartselectors";
 import { useDispatch } from "react-redux";
-import { clearItemFromCart } from "../../redux/reducers/cart/cartactions";
+import {
+  clearItemFromCart,
+  DecreaseItem,
+  IncreaseItem,
+} from "../../redux/reducers/cart/cartactions";
 export const CheckoutItem = () => {
   const CartItems = useSelector(SelectCartItems);
 
@@ -10,6 +14,14 @@ export const CheckoutItem = () => {
 
   const RemoveItemFromCart = (producttoRemoveId: number) => {
     dispatch(clearItemFromCart(CartItems, producttoRemoveId));
+  };
+
+  const DecreaseItemFromCart = (producttoDecreaseId: number) => {
+    dispatch(DecreaseItem(CartItems, producttoDecreaseId));
+  };
+
+  const IncreaseItemFromCart = (producttoIncreaseId: number) => {
+    dispatch(IncreaseItem(CartItems, producttoIncreaseId));
   };
 
   return (
@@ -30,13 +42,30 @@ export const CheckoutItem = () => {
                 </div>
               </Leftdiv>
               <Rightdiv>
-                <h1>x{value.quantity}</h1>
+                <Quandiv>
+                  <Icondiv
+                    onClick={() => {
+                      DecreaseItemFromCart(value.id);
+                    }}
+                  >
+                    &#60;
+                  </Icondiv>
+                  <h2>x{value.quantity}</h2>
+                  <Icondiv
+                    onClick={() => {
+                      IncreaseItemFromCart(value.id);
+                    }}
+                  >
+                    &#62;
+                  </Icondiv>
+                </Quandiv>
                 <ClearBtn
                   onClick={() => {
                     RemoveItemFromCart(value.id);
                   }}
                 >
-                  &#10005;
+                  {" "}
+                  <div>&#10005;</div>
                 </ClearBtn>
               </Rightdiv>
             </Innerdiv>
@@ -105,5 +134,16 @@ const ClearBtn = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+`;
+
+const Quandiv = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const Icondiv = styled.div`
+  transform: scale(1.6);
   cursor: pointer;
 `;

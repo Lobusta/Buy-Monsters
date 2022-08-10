@@ -58,7 +58,11 @@ const NavMenu = styled.ul`
 `;
 
 const NavCheckout = styled.li`
-  background-color: #be0c97;
+  background-color: #b63199;
   padding: 8px;
   border-radius: 9px;
+
+  &:hover {
+    background-color: #be0c97;
+  }
 `;
