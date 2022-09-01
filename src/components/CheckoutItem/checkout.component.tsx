@@ -8,8 +8,6 @@ import {
   IncreaseItem,
 } from "../../redux/reducers/cart/cartactions";
 
-import { clearCart } from "../../redux/reducers/cartSlice";
-
 export const CheckoutItem = () => {
   const CartItems = useSelector(SelectCartItems);
 
@@ -37,24 +35,26 @@ export const CheckoutItem = () => {
                 <Imgdiv>
                   <img
                     alt="Monsters"
-                    //src={`https://robohash.org/${value.id}?set=set2&size=70x70`}
+                    src={`https://robohash.org/${value.id}?set=set2&size=70x70`}
                   />
                 </Imgdiv>
-                <div>{/* <h2>{value.name}</h2> */}</div>
+                <div>
+                  <h2>{value.name}</h2>
+                </div>
               </Leftdiv>
               <Rightdiv>
                 <Quandiv>
                   <Icondiv
                     onClick={() => {
-                      // DecreaseItemFromCart(value.id);
+                      DecreaseItemFromCart(value.id);
                     }}
                   >
                     &#60;
                   </Icondiv>
-                  {/* <h2>x{value.quantity}</h2> */}
+                  <h2>x{value.quantity}</h2>
                   <Icondiv
                     onClick={() => {
-                      //   IncreaseItemFromCart(value.id);
+                      IncreaseItemFromCart(value.id);
                     }}
                   >
                     &#62;
@@ -62,7 +62,7 @@ export const CheckoutItem = () => {
                 </Quandiv>
                 <ClearBtn
                   onClick={() => {
-                    //  RemoveItemFromCart(value.id);
+                    RemoveItemFromCart(value.id);
                   }}
                 >
                   {" "}
@@ -147,4 +147,5 @@ const Quandiv = styled.div`
 const Icondiv = styled.div`
   transform: scale(1.6);
   cursor: pointer;
+  z-index: 1;
 `;

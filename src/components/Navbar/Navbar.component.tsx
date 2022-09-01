@@ -42,6 +42,7 @@ const NavDiv = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-around;
+  z-index: 10;
 `;
 
 const NavLink = styled(Link)`
